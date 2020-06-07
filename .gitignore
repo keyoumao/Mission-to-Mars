@@ -1,8 +1,11 @@
+# Adding config.py file.
+chromedriver.exe
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-chromedriver.exe
+
 # C extensions
 *.so
 
