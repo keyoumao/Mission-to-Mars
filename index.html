@@ -5,7 +5,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
    <title>Mission to Mars</title>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+   
  </head>
  <body>
   <div class="container">
@@ -49,6 +50,24 @@
         </div>
       </div>
     </div>
-  </body>
+
+<!-- Mars Hemispheres -->
+<div class="container-fluid" style="background-color: #99857A;">
+  <div class="row">
+    <h1 class="text-center">Hemispheres of Mars</h1>
+    <br>
+  {% for dict in mars.hemispheres %}
+      <div class="col-md-6 text-center">
+        <div class="card text-center" style="width: 32rem;">
+          <img class="card-img-top text-center" id="scale_id" src="{{ dict.img_url }}">
+            <div class="card-body text-center">
+              <h4 class="card-title text-center">{{ dict.title }}</h4>
+            </div>
+          </div>
+      </div>
+  {% endfor %}
+  </div>
+  </div>
+  
  </body>
 </html>

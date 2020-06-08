@@ -12,12 +12,14 @@ def scrape_all():
    # Initiate headless driver for deployment
     browser = Browser("chrome", executable_path="chromedriver", headless=True)
     news_title, news_paragraph = mars_news(browser)
+    hemisphere_image_urls = Mars_hemispheres(browser)
     # Run all scraping functions and store results in dictionary
     data = {
         "news_title": news_title,
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
+        "hemispheres": hemisphere_image_urls,
         "last_modified": dt.datetime.now()
     }
     browser.quit()
@@ -95,3 +97,42 @@ def mars_facts():
     # Convert dataframe into HTML format, add bootstrap
     return df.to_html()
 
+def Mars_hemispheres(browser):
+    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url)
+    
+    html = browser.html
+    hems_soup = BeautifulSoup(html, 'html.parser')
+
+    title = []
+    img_url = []
+
+    for link in range(4):
+    
+        browser.find_link_by_partial_text('Enhanced').click()
+    
+        html = browser.html
+        hems_soup = BeautifulSoup(html, 'html.parser')
+
+        title.append(hems_soup.find('h2', class_='title').get_text())
+
+        img_url.append(hems_soup.find('a', href=True, text='Original')['href'])
+
+    mars_hemi_zip = zip(title, img_url)
+    hemisphere_image_urls = []
+
+    # Iterate through the zipped object
+    for title, img in mars_hemi_zip:
+        
+        mars_hemi_dict = {}
+        
+        # Add hemisphere title to dictionary
+        mars_hemi_dict['title'] = title
+        
+        # Add image url to dictionary
+        mars_hemi_dict['img_url'] = img
+        
+        # Append the list with dictionaries
+        hemisphere_image_urls.append(mars_hemi_dict)
+        
+    return hemisphere_image_urls
