@@ -51,23 +51,24 @@
       </div>
     </div>
 
-<!-- Mars Hemispheres -->
-<div class="container-fluid" style="background-color: #99857A;">
-  <div class="row">
-    <h1 class="text-center">Hemispheres of Mars</h1>
-    <br>
-  {% for dict in mars.hemispheres %}
-      <div class="col-md-6 text-center">
-        <div class="card text-center" style="width: 32rem;">
-          <img class="card-img-top text-center" id="scale_id" src="{{ dict.img_url }}">
-            <div class="card-body text-center">
-              <h4 class="card-title text-center">{{ dict.title }}</h4>
-            </div>
+        <!-- Mars Hemispheres -->
+    <div class="container">
+      <div class="row">
+        <h3 class="text-center">Mars Hemispheres</h3>
+        <br>
+      {% for item in mars.hemispheres %}
+          <div class="col-md-6 text-center">
+            <div class="card text-center" style="width:64rem;">
+              <img class="card-img-top text-center" src="{{ item.img_url }}">
+                <div class="card-body text-center">
+                  <h4 class="card-title text-center">{{ item.title }}</h4>
+                </div>
+              </div>
           </div>
+      {% endfor %}
       </div>
-  {% endfor %}
-  </div>
-  </div>
+      </div>
   
+    
  </body>
 </html>

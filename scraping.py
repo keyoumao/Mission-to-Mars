@@ -107,8 +107,8 @@ def Mars_hemispheres(browser):
     title = []
     img_url = []
 
-    for link in range(4):
-    
+    for i in range(4):
+        
         browser.find_link_by_partial_text('Enhanced').click()
     
         html = browser.html
@@ -117,7 +117,7 @@ def Mars_hemispheres(browser):
         title.append(hems_soup.find('h2', class_='title').get_text())
 
         img_url.append(hems_soup.find('a', href=True, text='Original')['href'])
-
+        
     mars_hemi_zip = zip(title, img_url)
     hemisphere_image_urls = []
 
